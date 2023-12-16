@@ -1,0 +1,12 @@
+{
+  "FolderOrderSettings": [
+    {"name":"Objects","order":9,"path":"folders/Objects.yy",},
+    {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
+    {"name":"Scripts","order":5,"path":"folders/Scripts.yy",},
+    {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"objBall","order":1,"path":"objects/objBall/objBall.yy",},
+    {"name":"scrVector","order":1,"path":"scripts/scrVector/scrVector.yy",},
+  ],
+}
