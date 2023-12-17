@@ -22,6 +22,18 @@ function Vector3(x, y, z) constructor {
 	static to_rgb = function() {
 		draw_set_color(make_color_rgb(self.x, self.y, self.z));
 	}
+	
+	static save = function() {
+		var data = {x: self.x, y: self.y, z: self.z};
+		return data;
+	}
+	
+	static load = function(data) {
+		self.x = data.x;
+		self.y = data.y;
+		self.z = data.z;
+		return self;
+	}
 }
 
 function Vector2(x, y) constructor {
@@ -42,6 +54,17 @@ function Vector2(x, y) constructor {
 	
 	static divi = function(v) {
 		return new Vector2(self.x / v, self.y / v);
+	}
+	
+	static save = function() {
+		var data = {x: self.x, y: self.y};
+		return data;
+	}
+	
+	static load = function(data) {
+		self.x = data.x;
+		self.y = data.y;
+		return self;
 	}
 }
 

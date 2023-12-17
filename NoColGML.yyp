@@ -23,7 +23,6 @@
     "IDEVersion": "2023.11.1.129",
   },
   "resources": [
-    {"id":{"name":"scrMain","path":"scripts/scrMain/scrMain.yy",},},
     {"id":{"name":"objBall","path":"objects/objBall/objBall.yy",},},
     {"id":{"name":"objMain","path":"objects/objMain/objMain.yy",},},
     {"id":{"name":"scrVector","path":"scripts/scrVector/scrVector.yy",},},

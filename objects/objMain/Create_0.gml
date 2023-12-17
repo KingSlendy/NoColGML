@@ -1,3 +1,6 @@
+randomize();
+draw_set_circle_precision(64);
+
 stable_color = new Vector3(0, 255, 0);
 unstable_color = new Vector3(255, 0, 0);
 
@@ -20,7 +23,6 @@ iterations = 0;
 
 spawn_range_factor = 0.5;
 balls = [];
-max_history = 100;
 
 for (var i = 0; i < num_balls; i++) {
 	var angle = random(2 * pi);
@@ -36,11 +38,6 @@ for (var i = 0; i < num_balls; i++) {
 }
 
 ok_count = 0;
-
-function update_scale(pos) {
-	wheel_pos = clamp(wheel_pos + pos, 0, 1);
-	scale = wheel_pos * (max_scale - min_scale) + min_scale
-}
 
 function update(balls, spd) {
 	var stable = true;
@@ -97,4 +94,51 @@ function update_pos(balls, speed_down_factor) {
 	});
 
 	speed_down_counter--;
+}
+
+function save_pos() {
+	data = {
+		balls: []
+	};
+	
+	array_foreach(balls, function(ball) {
+		with (ball) {
+			array_push(other.data.balls, {
+				position: position,
+				velocity: velocity,
+				radius,
+				stable,
+				stable_count
+			});
+		}
+	});
+	
+	var save = json_stringify(data);
+	var file = file_text_open_write("circles.dat");
+	file_text_write_string(file, save);
+	file_text_close(file);
+}
+
+function load_pos() {
+	if (!file_exists("circles.dat")) {
+		return;
+	}
+	
+	var file = file_text_open_read("circles.dat");
+	var load = file_text_read_string(file);
+	file_text_close(file);
+	var data = json_parse(load);
+	
+	instance_destroy(objBall);
+	balls = [];
+	
+	array_foreach(data.balls, function(ball) {
+		var b = instance_create_layer(0, 0, "Instances", objBall);
+		b.position = new Vector2(0, 0).load(ball.position);
+		b.velocity = new Vector2(0, 0).load(ball.velocity);
+		b.radius = ball.radius;
+		b.stable = ball.stable;
+		b.stable_count = ball.stable_count;
+		array_push(balls, b);
+	});
 }

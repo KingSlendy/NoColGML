@@ -1,7 +1,3 @@
-if (keyboard_check_pressed(vk_space)) {
-	speed_down_factor_goal = (speed_down_factor == 1) ? 10 : 1;
-}
-
 if (waiting_speed_factor != speed_down_factor_goal) {
 	waiting_speed_factor += speed_down_factor_goal - waiting_speed_factor;
 }
@@ -11,7 +7,6 @@ var stable = true;
 if (!speed_down_counter) {
 	array_foreach(balls, function(ball) {
 		ball.stable = true;
-		ball.save();
 	});
 
 	stable = update(balls, 1);
@@ -49,3 +44,17 @@ array_foreach(balls, function(ball) {
 
 center_of_mass = center_of_mass.divi(array_length(balls));
 iterations++;
+
+#region Key Events
+if (keyboard_check_pressed(vk_space)) {
+	speed_down_factor_goal = (speed_down_factor == 1) ? 10 : 1;
+}
+
+if (keyboard_check_pressed(ord("S"))) {
+	save_pos();
+}
+
+if (keyboard_check_pressed(ord("L"))) {
+	load_pos();
+}
+#endregion
